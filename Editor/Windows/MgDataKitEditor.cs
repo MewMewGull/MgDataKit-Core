@@ -12,7 +12,7 @@ namespace MgDataKit.Editor {
     /// MgDataKit 编辑窗口：管理表类型、Asset 与可注册的数据源适配器。
     /// </summary>
     public class MgDataKitEditor : EditorWindow {
-        private const string UssPath = "Assets/MgDataKit/Editor/Windows/MgDataKitEditor.uss";
+        private const string UssRelativePath = "Editor/Windows/MgDataKitEditor.uss";
         private const float DefaultLeftPanelWidth = 180f;
         private const float LeftPanelMinWidth = 140f;
 
@@ -89,7 +89,8 @@ namespace MgDataKit.Editor {
             rootVisualElement.Clear();
             _extensionViewsBuilt = false;
             rootVisualElement.style.flexGrow = 1f;
-            StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(UssPath);
+            StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(
+                MgDataKitEditorAssetPaths.Resolve(UssRelativePath));
             if (styleSheet != null)
                 rootVisualElement.styleSheets.Add(styleSheet);
 

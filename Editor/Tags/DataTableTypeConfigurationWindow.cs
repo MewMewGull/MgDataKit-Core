@@ -13,8 +13,8 @@ namespace MgDataKit.Editor {
     /// 编辑单个 MgData 表类型的来源和 Tags 配置。
     /// </summary>
     internal sealed class DataTableTypeConfigurationWindow : EditorWindow {
-        private const string UssPath =
-            "Assets/MgDataKit/Editor/Tags/DataTableTypeConfigurationWindow.uss";
+        private const string UssRelativePath =
+            "Editor/Tags/DataTableTypeConfigurationWindow.uss";
 
         private readonly List<Type> _types = new();
         private readonly List<string> _typeNames = new();
@@ -73,7 +73,8 @@ namespace MgDataKit.Editor {
         private void CreateGUI() {
             rootVisualElement.Clear();
             rootVisualElement.style.flexGrow = 1f;
-            StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(UssPath);
+            StyleSheet styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(
+                MgDataKitEditorAssetPaths.Resolve(UssRelativePath));
             if (styleSheet != null)
                 rootVisualElement.styleSheets.Add(styleSheet);
 

@@ -1,0 +1,14 @@
+{
+  "name": "com.mgdatakit.core",
+  "displayName": "MgDataKit Core",
+  "version": "0.1.0",
+  "unity": "2022.3",
+  "description": "Unity data asset import and editor integration core for MgDataKit.",
+  "keywords": [
+    "unity",
+    "data",
+    "import",
+    "editor"
+  ],
+  "license": "MIT"
+}

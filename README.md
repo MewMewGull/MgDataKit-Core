@@ -12,7 +12,37 @@ MgDataKit Core 是 Unity 的数据资产与编辑器集成核心层。它不依�
 
 ## 安装
 
-将本仓库内容复制到 Unity 2022.3 项目的 `Assets/MgDataKit` 目录。导入后，通过 MgDataKit 编辑器菜单创建项目设置和 Catalog 资产。
+本仓库符合 Unity Package Manager（UPM）包结构，包名为 `com.mgdatakit.core`，最低支持 Unity 2022.3。
+
+### 从 Git URL 安装
+
+在 Unity 的 Package Manager 中点击 `+` → `Add package from git URL...`，输入仓库地址：
+
+```text
+https://github.com/<owner>/MgDataKit-Core.git
+```
+
+也可以直接在项目的 `Packages/manifest.json` 中添加：
+
+```json
+{
+  "dependencies": {
+    "com.mgdatakit.core": "https://github.com/<owner>/MgDataKit-Core.git#main"
+  }
+}
+```
+
+正式发布时建议使用 Git tag，例如 `#v0.1.0`，避免分支变化导致项目收到未经验证的代码。
+
+### 从本地目录安装
+
+在 Package Manager 中选择 `+` → `Add package from disk...`，选中本仓库根目录下的 `package.json`。本地包目录必须保留 `package.json`、`Runtime/` 和 `Editor/`。
+
+### 兼容旧的 Assets 复制方式
+
+仍然可以将仓库复制到 Unity 工程的 `Assets/MgDataKit` 目录。核心会自动兼容该路径；但新项目更推荐使用 Package Manager。
+
+安装后，通过 MgDataKit 编辑器菜单创建项目设置和 Catalog 资产。它们属于使用方 Unity 工程，会创建在 `Assets/MgDataKit/Project/`，不会写入 Package Manager 缓存目录。
 
 项目资产直接使用当前字段布局；MgDataKit 不维护 schema 版本字段，也不提供自动结构迁移。每个 Unity 项目都应创建自己的设置和 Catalog 资产。
 
