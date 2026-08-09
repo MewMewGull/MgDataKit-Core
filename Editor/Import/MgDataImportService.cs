@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace MgDataKit.Editor {
-    internal static class MgDataImportService {
+    public static class MgDataImportService {
         public static bool Import(MgDataBase asset) {
             if (asset == null)
                 return false;

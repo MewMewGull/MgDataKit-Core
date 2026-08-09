@@ -1297,7 +1297,7 @@ namespace MgDataKit.Editor {
             EditorApplication.delayCall += HandleProjectChanged;
         }
 
-        internal static void RepaintOpenWindows() {
+        public static void RepaintOpenWindows() {
             MgDataKitEditor[] windows = Resources.FindObjectsOfTypeAll<MgDataKitEditor>();
             for (var i = 0; i < windows.Length; i++)
                 windows[i].HandleExternalCatalogChange(EditorRefreshReason.ExternalRequest);

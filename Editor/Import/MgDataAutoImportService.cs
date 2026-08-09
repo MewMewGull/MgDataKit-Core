@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace MgDataKit.Editor {
-    internal static class MgDataAutoImportService {
+    public static class MgDataAutoImportService {
         private static bool _isImporting;
         private static double _lastTriggeredAt;
         private const double MinTriggerIntervalSeconds = 0.25d;

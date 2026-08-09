@@ -12,8 +12,8 @@ namespace MgDataKit.Editor {
     /// <summary>
     /// 将不同数据源读取出的二维文本网格映射为 MgData 行对象。
     /// </summary>
-    internal static class MgDataGridImporter {
-        internal static bool TryGetListField(Type assetType, out FieldInfo listField) {
+    public static class MgDataGridImporter {
+        public static bool TryGetListField(Type assetType, out FieldInfo listField) {
             return TryGetSingleListField(assetType, out listField);
         }
 
@@ -126,7 +126,7 @@ namespace MgDataKit.Editor {
                         continue;
 
                     try {
-                        object value = ConvertCellValue(raw, column.Value.leafField.FieldType);
+                        object value = ConvertCellValue(raw, column.Value.leafField.FieldType, elemType);
                         if (value != null)
                             SetNestedValue(row, column.Value.pathParts, column.Value.leafField, value);
                     }
@@ -173,7 +173,8 @@ namespace MgDataKit.Editor {
                     continue;
 
                 var nextPath = new List<string>(pathParts) { field.Name };
-                if (IsSimpleOrUnityType(field.FieldType) || IsSupportedListType(field.FieldType)) {
+                if (IsSimpleOrUnityType(field.FieldType) || IsSupportedListType(field.FieldType) ||
+                    MgDataKitExtensionRegistry.CanConvertValue(field.FieldType)) {
                     result.Add(new ColumnInfo {
                         PathParts = nextPath.ToArray(),
                         LeafField = field
@@ -197,7 +198,7 @@ namespace MgDataKit.Editor {
             for (var rowIndex = 0; rowIndex <= maxScan; rowIndex++) {
                 string firstCell = GetCell(grid[rowIndex], 0);
                 if (!string.IsNullOrEmpty(firstCell) &&
-                    MgDataValueParser.IsKnownTypeName(firstCell.Trim())) {
+                    MgDataKitExtensionRegistry.IsKnownValueTypeName(firstCell.Trim())) {
                     typeRowIndex = rowIndex;
                     break;
                 }
@@ -271,7 +272,7 @@ namespace MgDataKit.Editor {
             return bestRowIndex;
         }
 
-        private static object ConvertCellValue(string raw, Type targetType) {
+        private static object ConvertCellValue(string raw, Type targetType, Type rowType) {
             if (targetType == typeof(string))
                 return raw.Trim();
             if (targetType == typeof(bool)) {
@@ -314,6 +315,17 @@ namespace MgDataKit.Editor {
                 return ParseListString(raw);
             if (targetType.IsEnum)
                 return ParseEnum(raw, targetType);
+
+            if (MgDataKitExtensionRegistry.TryConvertValue(
+                    raw,
+                    targetType,
+                    rowType,
+                    out object converted,
+                    out string conversionError))
+                return converted;
+
+            if (!string.IsNullOrWhiteSpace(conversionError))
+                throw new FormatException(conversionError);
 
             return Convert.ChangeType(raw.Trim(), targetType, CultureInfo.InvariantCulture);
         }

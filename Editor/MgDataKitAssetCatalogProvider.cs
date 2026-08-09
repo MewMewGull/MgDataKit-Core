@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace MgDataKit.Editor {
     [InitializeOnLoad]
-    internal static class MgDataKitAssetCatalogProvider {
+    public static class MgDataKitAssetCatalogProvider {
         public const string AssetPath = "Assets/MgDataKit/Project/MgDataKitAssetCatalog.asset";
 
         private static MgDataKitAssetCatalog _cachedInstance;

@@ -132,7 +132,7 @@ namespace MgDataKit.Editor {
         internal List<MgDataKitAssetTypeEntry> MutableTypeEntries =>
             _typeEntries ??= new List<MgDataKitAssetTypeEntry>();
 
-        internal MgDataKitAssetTypeEntry FindTypeEntry(Type assetType) {
+        public MgDataKitAssetTypeEntry FindTypeEntry(Type assetType) {
             if (assetType == null)
                 return null;
 
@@ -145,7 +145,7 @@ namespace MgDataKit.Editor {
             return null;
         }
 
-        internal MgDataKitAssetEntry FindEntry(MgDataBase asset) {
+        public MgDataKitAssetEntry FindEntry(MgDataBase asset) {
             if (asset == null)
                 return null;
 
@@ -153,7 +153,7 @@ namespace MgDataKit.Editor {
             return typeEntry?.FindEntry(asset);
         }
 
-        internal MgDataKitAssetEntry AddEntry(MgDataBase asset) {
+        public MgDataKitAssetEntry AddEntry(MgDataBase asset) {
             if (asset == null)
                 return null;
 

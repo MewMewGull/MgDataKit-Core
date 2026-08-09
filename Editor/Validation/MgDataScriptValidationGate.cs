@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MgDataKit.Editor {
     [InitializeOnLoad]
-    internal static class MgDataScriptValidationGate {
+    public static class MgDataScriptValidationGate {
         private static readonly List<string> Errors = new();
         private static readonly List<string> PersistedLintLogs = new();
         private static readonly List<string> PersistedLintWarnings = new();

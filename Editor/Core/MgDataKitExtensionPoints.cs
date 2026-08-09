@@ -55,15 +55,33 @@ namespace MgDataKit.Editor {
         bool TryGetPriority(MgDataBase asset, out int priority);
     }
 
+    /// <summary>
+    /// Lets an optional data-source package map source text to a project-specific field type.
+    /// Core keeps the built-in scalar conversions and delegates external asset references here.
+    /// </summary>
+    public interface IMgDataValueConverter {
+        bool CanConvert(Type targetType);
+
+        bool IsKnownTypeName(string typeName);
+
+        bool TryConvert(
+            string raw,
+            Type targetType,
+            Type rowType,
+            out object value,
+            out string errorMessage);
+    }
+
     internal sealed class MgDataImportExtensionState {
         public IMgDataImportExtension Extension;
         public object Snapshot;
     }
 
-    internal static class MgDataKitExtensionRegistry {
+    public static class MgDataKitExtensionRegistry {
         private static IReadOnlyList<IMgDataImportExtension> _importExtensions;
         private static IReadOnlyList<IMgDataSourceImporter> _dataSourceImporters;
         private static IReadOnlyList<IMgDataSyncOrderProvider> _syncOrderProviders;
+        private static IReadOnlyList<IMgDataValueConverter> _valueConverters;
         private static IReadOnlyList<IMgDataPlayModeSyncProvider> _playModeSyncProviders;
         private static IReadOnlyList<IMgDataRowReferenceProvider> _rowReferenceProviders;
 
@@ -108,6 +126,54 @@ namespace MgDataKit.Editor {
             return null;
         }
 
+        public static bool IsKnownValueTypeName(string typeName) {
+            if (MgDataValueParser.IsKnownTypeName(typeName))
+                return true;
+
+            IReadOnlyList<IMgDataValueConverter> converters = GetValueConverters();
+            for (var i = 0; i < converters.Count; i++) {
+                if (converters[i].IsKnownTypeName(typeName))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public static bool CanConvertValue(Type targetType) {
+            IReadOnlyList<IMgDataValueConverter> converters = GetValueConverters();
+            for (var i = 0; i < converters.Count; i++) {
+                if (converters[i].CanConvert(targetType))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public static bool TryConvertValue(
+            string raw,
+            Type targetType,
+            Type rowType,
+            out object value,
+            out string errorMessage) {
+            value = null;
+            errorMessage = null;
+            IReadOnlyList<IMgDataValueConverter> converters = GetValueConverters();
+            for (var i = 0; i < converters.Count; i++) {
+                IMgDataValueConverter converter = converters[i];
+                if (!converter.CanConvert(targetType))
+                    continue;
+
+                return converter.TryConvert(
+                    raw,
+                    targetType,
+                    rowType,
+                    out value,
+                    out errorMessage);
+            }
+
+            return false;
+        }
+
         private static IReadOnlyList<IMgDataImportExtension> GetImportExtensions() {
             if (_importExtensions == null)
                 _importExtensions = Discover<IMgDataImportExtension>();
@@ -118,6 +184,12 @@ namespace MgDataKit.Editor {
             if (_syncOrderProviders == null)
                 _syncOrderProviders = Discover<IMgDataSyncOrderProvider>();
             return _syncOrderProviders;
+        }
+
+        private static IReadOnlyList<IMgDataValueConverter> GetValueConverters() {
+            if (_valueConverters == null)
+                _valueConverters = Discover<IMgDataValueConverter>();
+            return _valueConverters;
         }
 
         private static IReadOnlyList<T> Discover<T>() where T : class {
