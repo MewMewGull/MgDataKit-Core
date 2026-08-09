@@ -30,7 +30,7 @@
     flex-grow: 1;
     flex-shrink: 1;
     min-width: 0;
-    unity-font-style: bold;
+    -unity-font-style: bold;
     white-space: nowrap;
     -unity-text-overflow-position: end;
 }
@@ -115,7 +115,7 @@
     flex-grow: 0;
     flex-shrink: 1;
     min-width: 0;
-    unity-font-style: bold;
+    -unity-font-style: bold;
     white-space: nowrap;
     -unity-text-overflow-position: end;
 }

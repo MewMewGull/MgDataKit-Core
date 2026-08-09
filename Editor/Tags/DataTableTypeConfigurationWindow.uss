@@ -21,7 +21,7 @@
     flex-grow: 1;
     flex-shrink: 1;
     min-width: 0;
-    unity-font-style: bold;
+    -unity-font-style: bold;
     white-space: nowrap;
     -unity-text-overflow-position: end;
 }
@@ -75,7 +75,7 @@
 }
 
 .mg-data-kit-type-config-section-title {
-    unity-font-style: bold;
+    -unity-font-style: bold;
     margin-bottom: 3px;
 }
 
