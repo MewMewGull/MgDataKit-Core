@@ -1,0 +1,115 @@
+.mg-data-kit-type-config-root {
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 0;
+    min-height: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.mg-data-kit-type-config-heading {
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0;
+    margin-bottom: 6px;
+}
+
+.mg-data-kit-type-config-title {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    unity-font-style: bold;
+    white-space: nowrap;
+    -unity-text-overflow-position: end;
+}
+
+.mg-data-kit-type-config-summary {
+    flex-shrink: 0;
+    margin-left: 8px;
+    color: rgb(170, 170, 170);
+    font-size: 11px;
+    max-width: 260px;
+    overflow: hidden;
+    white-space: nowrap;
+    -unity-text-overflow-position: end;
+}
+
+#mg-data-kit-type-config-type-popup {
+    flex-shrink: 0;
+    margin-bottom: 4px;
+}
+
+#mg-data-kit-type-config-help {
+    flex-shrink: 0;
+    margin-top: 2px;
+    margin-bottom: 4px;
+}
+
+.mg-data-kit-type-config-details {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    min-height: 0;
+}
+
+.mg-data-kit-type-config-details > .unity-scroll-view__content-viewport {
+    min-width: 0;
+}
+
+.mg-data-kit-type-config-details .unity-scroll-view__content-container {
+    min-width: 0;
+    width: 100%;
+}
+
+.mg-data-kit-type-config-details .unity-base-field {
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+.mg-data-kit-type-config-tags-section {
+    flex-shrink: 0;
+    margin-top: 8px;
+}
+
+.mg-data-kit-type-config-section-title {
+    unity-font-style: bold;
+    margin-bottom: 3px;
+}
+
+.mg-data-kit-type-config-tags-row {
+    flex-direction: row;
+    align-items: center;
+    min-width: 0;
+}
+
+#mg-data-kit-type-config-tag-menu {
+    flex-shrink: 0;
+    min-width: 96px;
+}
+
+.mg-data-kit-type-config-tag-summary {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    margin-left: 8px;
+    color: rgb(175, 175, 175);
+    overflow: hidden;
+    white-space: nowrap;
+    -unity-text-overflow-position: end;
+}
+
+.mg-data-kit-type-config-actions {
+    flex-direction: row;
+    flex-shrink: 0;
+    min-width: 0;
+    margin-top: 8px;
+}
+
+.mg-data-kit-type-config-actions > .unity-button {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 120px;
+}

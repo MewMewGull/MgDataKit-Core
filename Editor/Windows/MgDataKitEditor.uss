@@ -1,0 +1,245 @@
+.mg-data-kit-pane {
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    min-height: 0;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+#mg-data-kit-type-pane {
+    min-width: 140px;
+}
+
+#mg-data-kit-asset-pane {
+    min-width: 280px;
+}
+
+.mg-data-kit-heading {
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0;
+    margin-bottom: 4px;
+}
+
+.mg-data-kit-heading-title {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    unity-font-style: bold;
+    white-space: nowrap;
+    -unity-text-overflow-position: end;
+}
+
+.mg-data-kit-heading-summary {
+    flex-shrink: 0;
+    margin-left: 8px;
+    color: rgb(170, 170, 170);
+    font-size: 11px;
+}
+
+.mg-data-kit-filter-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0;
+    margin-bottom: 4px;
+}
+
+#mg-data-kit-type-search {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 80px;
+}
+
+#mg-data-kit-filter-menu {
+    flex-grow: 0;
+    flex-shrink: 1;
+    min-width: 72px;
+    margin-left: 4px;
+}
+
+.mg-data-kit-help-box {
+    flex-shrink: 0;
+    margin-top: 3px;
+    margin-bottom: 4px;
+}
+
+.mg-data-kit-list {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    min-height: 0;
+}
+
+/* ListView owns item sizing; keep its reusable wrapper neutral. */
+.mg-data-kit-list .unity-list-view__item,
+.mg-data-kit-list .unity-collection-view__item {
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    align-items: stretch;
+}
+
+.mg-data-kit-type-row {
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    flex-shrink: 0;
+    min-width: 0;
+    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(80, 80, 80, 0.45);
+}
+
+.mg-data-kit-type-row-selected {
+    background-color: rgba(56, 112, 174, 0.5);
+}
+
+.mg-data-kit-type-name {
+    flex-grow: 0;
+    flex-shrink: 1;
+    min-width: 0;
+    unity-font-style: bold;
+    white-space: nowrap;
+    -unity-text-overflow-position: end;
+}
+
+.mg-data-kit-type-tags {
+    flex-grow: 0;
+    flex-shrink: 1;
+    min-width: 0;
+    margin-top: 2px;
+    color: rgb(175, 175, 175);
+    font-size: 11px;
+    white-space: nowrap;
+    -unity-text-overflow-position: end;
+}
+
+.mg-data-kit-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0;
+    margin-top: 5px;
+}
+
+.mg-data-kit-actions > .unity-button {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 64px;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 2px;
+}
+
+#mg-data-kit-script-field {
+    flex-shrink: 0;
+    margin-bottom: 4px;
+}
+
+#mg-data-kit-asset-list {
+    margin-top: 4px;
+}
+
+.mg-data-kit-asset-row {
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 0;
+    min-height: 70px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(80, 80, 80, 0.55);
+}
+
+.mg-data-kit-asset-row > .unity-base-field {
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 0;
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+    margin-bottom: 2px;
+}
+
+.mg-data-kit-source-row {
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 0;
+    height: 20px;
+}
+
+.mg-data-kit-source-row .unity-base-field {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+    margin-bottom: 0;
+}
+
+.mg-data-kit-asset-actions-row {
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 0;
+    height: 20px;
+    margin-top: 2px;
+}
+
+.mg-data-kit-asset-actions-row > .unity-button {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 64px;
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.mg-data-kit-asset-actions-row > .unity-button.mg-data-kit-fixed-action-button,
+.mg-data-kit-asset-actions-row > .unity-button.mg-data-kit-danger-button {
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 72px;
+}
+
+.mg-data-kit-asset-extension-row,
+.mg-data-kit-asset-extension {
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.mg-data-kit-asset-extension-row > .mg-data-kit-asset-extension,
+.mg-data-kit-asset-actions-row > .mg-data-kit-asset-extension {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+}
