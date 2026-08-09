@@ -1,29 +1,29 @@
 # MgDataKit Core
 
-MgDataKit Core is a Unity data-asset and editor integration layer. It is intentionally independent from any game's concrete table definitions: game projects keep their table classes and source adapters outside this repository.
+MgDataKit Core 是 Unity 的数据资产与编辑器集成核心层。它不依赖任何具体游戏的数据表定义；游戏项目应在仓库外维护自己的表类和数据源适配器。
 
-## Layout
+## 目录结构
 
-- `Runtime/` — `MgDataBase`, attributes, merge helpers, and shared value types. Source metadata is editor-only and owned by the project Catalog.
-- `Editor/` — catalog, import pipeline, validation, settings, tags, and editor windows.
-- `Editor/Import/` — source-neutral grid mapping, import orchestration, and local cache utilities. No concrete data-source reader is included.
+- `Runtime/`：`MgDataBase`、特性、合并辅助方法和通用值类型。数据源元数据属于编辑器侧，由项目 Catalog 管理。
+- `Editor/`：Catalog、导入管线、校验、设置、标签和编辑器窗口。
+- `Editor/Import/`：与数据源无关的网格映射、导入编排和本地缓存工具。不包含任何具体数据源读取器。
 
-This repository contains only reusable core code. Project-specific assets, credentials, external services, third-party data readers, and game-specific adapters are intentionally excluded.
+本仓库只包含可复用的核心代码，明确排除项目资产、凭据、外部服务、第三方数据读取器和游戏专用适配器。
 
-## Installation
+## 安装
 
-Copy the contents of this repository into `Assets/MgDataKit` in a Unity 2022.3 project. Create the project settings and catalog assets from the MgDataKit editor menus after import.
+将本仓库内容复制到 Unity 2022.3 项目的 `Assets/MgDataKit` 目录。导入后，通过 MgDataKit 编辑器菜单创建项目设置和 Catalog 资产。
 
-Project assets use the current field layout directly; MgDataKit does not keep schema-version fields or automatic structure-migration paths. Each Unity project should create its own settings and catalog assets.
+项目资产直接使用当前字段布局；MgDataKit 不维护 schema 版本字段，也不提供自动结构迁移。每个 Unity 项目都应创建自己的设置和 Catalog 资产。
 
-## Extension points
+## 扩展点
 
-Optional integrations should implement `MgDataKit.Editor.IMgDataSourceAdapter` and/or `IMgDataSourceImporter` to convert an external source into the common grid. `IMgDataImportExtension` handles table-specific import behavior, and `IMgDataSyncOrderProvider` can provide deterministic cross-table synchronization order. MgDataKit discovers these implementations from loaded editor assemblies, so integrations stay outside the core repository.
+可选集成应在仓库外实现 `MgDataKit.Editor.IMgDataSourceAdapter` 和/或 `IMgDataSourceImporter`，将外部数据源转换为通用网格。`IMgDataImportExtension` 用于表级导入处理，`IMgDataSyncOrderProvider` 可用于提供相关表的确定性同步顺序。MgDataKit 会从已加载的编辑器程序集发现这些实现，因此具体集成无需进入核心仓库。
 
-EditorWindow integrations should implement `IMgDataKitEditorExtension`. The extension registers actions and empty-state views through `IMgDataKitEditorRegistry` and can provide `IMgDataKitAssetRowExtension` implementations for source-specific row UI. Functional slots currently include the left action bar, selected-type action bar, empty-state actions/views, Asset row source/actions, and window lifecycle callbacks. The type heading, type search/filter area, type list, and Asset heading intentionally remain core-owned until their extension contracts are stabilized.
+编辑器窗口集成应实现 `IMgDataKitEditorExtension`。扩展可以通过 `IMgDataKitEditorRegistry` 注册操作和空状态视图，也可以提供 `IMgDataKitAssetRowExtension` 实现，用于数据源相关的行 UI。类型标题、类型搜索/筛选区域、类型列表和 Asset 标题仍由核心负责，直到相关扩展契约稳定。
 
-Data sources may additionally implement `IMgDataSourceAdapter`. Each adapter owns a stable `SourceId`, binding validation, source reads, binding UI, source opening, and new-binding initialization. Adapters can optionally implement `IMgDataSourceBatchImportAdapter` for source-specific batch creation workflows. Catalog entries carry a generic `SourceId` and opaque source data without retaining source-specific compatibility fields.
+数据源还可以实现 `IMgDataSourceAdapter`。适配器负责稳定的 `SourceId`、绑定校验、数据读取、绑定 UI、打开来源和新建绑定初始化；也可以实现 `IMgDataSourceBatchImportAdapter` 提供数据源专用的批量创建流程。Catalog 条目只保存通用的 `SourceId` 和不透明来源数据，不保留具体数据源的兼容字段。
 
-Keep source adapters isolated from the core pipeline. An adapter should convert its source into the common grid representation, while table-specific reconciliation belongs in an import extension. This preserves a small stable API for future open-source contributors.
+数据源适配器应与核心导入管线隔离：适配器负责将来源转换为通用网格，表级对账和后处理则放在导入扩展中。这样可以保持稳定、精简的核心 API，方便后续开源集成。
 
-Source adapters can be maintained in separate repositories and discovered through the extension points above without changing the core importer.
+具体适配器可以维护在独立仓库中，并通过上述扩展点被发现，不需要修改核心导入器。

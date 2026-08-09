@@ -1,12 +1,12 @@
-# Security Boundary
+# 安全边界
 
-This repository contains only source-neutral MgDataKit core code.
+本仓库只包含与数据源无关的 MgDataKit 核心代码。
 
-Do not commit any of the following here:
+以下内容禁止提交到本仓库：
 
-- project settings, catalogs, or generated data assets;
-- access tokens, application IDs, application secrets, or private service URLs;
-- spreadsheets, table exports, story/localization data, or other project content;
-- concrete data-source adapters or bundled third-party service clients.
+- 项目设置、Catalog、生成的数据资产和其他项目配置；
+- 访问令牌、应用 ID、应用密钥和私有服务地址；
+- 电子表格、表格导出文件、剧情/本地化数据和其他项目内容；
+- 具体数据源适配器，以及随附的第三方服务客户端或二进制文件。
 
-Keep integrations in a separate repository or private project package. Core integrations should expose only the extension contracts defined in `Editor/Core/`.
+具体集成应放在独立仓库或私有项目包中。核心集成只应使用 `Editor/Core/` 中定义的扩展契约。
