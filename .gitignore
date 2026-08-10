@@ -14,3 +14,7 @@
 # Local editor and generated project assets
 Project/
 Assets/MgDataKit/Project/
+
+# Repository boundary: concrete data-source packages belong elsewhere
+/Adapters~/
+/Adapters~.meta

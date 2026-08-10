@@ -8,7 +8,7 @@ MgDataKit Core 是 Unity 的数据资产与编辑器集成核心层。它不依�
 - `Editor/`：Catalog、导入管线、校验、设置、标签和编辑器窗口。
 - `Editor/Import/`：与数据源无关的网格映射、导入编排和本地缓存工具。不包含任何具体数据源读取器。
 
-本仓库根包只包含可复用的核心代码，明确排除项目资产、凭据、外部服务、第三方数据读取器和游戏专用适配器。通用 Excel 读取能力位于同仓库的可选 `com.mgdatakit.excel` 子包。
+本仓库只包含可复用的核心代码，明确排除项目资产、凭据、外部服务、第三方数据读取器和具体数据源适配器。
 
 ## 安装
 
@@ -58,29 +58,4 @@ https://github.com/MewMewGull/MgDataKit-Core.git#main
 
 具体适配器可以维护在独立仓库中，并通过上述扩展点被发现，不需要修改核心导入器。
 
-## 可选 Excel 集成
-
-如果需要从本地 `.xlsx` 导入，请额外安装 `com.mgdatakit.excel`：
-
-Excel 子包位于 `Adapters~/` 保留目录，因此只安装 Core 时不会触发 NPOI/Addressables 编译。
-
-```text
-https://github.com/MewMewGull/MgDataKit-Core.git?path=/Adapters~/Excel#main
-```
-
-由于 Core 尚未发布到 Unity Registry，建议在项目 `Packages/manifest.json` 中同时声明 Core 和 Excel：
-
-```json
-{
-  "dependencies": {
-    "com.mgdatakit.core": "https://github.com/MewMewGull/MgDataKit-Core.git#main",
-    "com.mgdatakit.excel": "https://github.com/MewMewGull/MgDataKit-Core.git?path=/Adapters~/Excel#main"
-  }
-}
-```
-
-Excel 子包包含 NPOI 2.5.6 及其 Apache 2.0 许可证，并依赖 Addressables 1.22.3。它提供 Excel 绑定、自动导入、路径维护、来源行号和 Addressables Unity 资源字段转换；具体 `.xlsx` 文件仍应放在使用方项目中。
-
-Core 的 `IMgDataValueConverter` 契约允许其他可选数据源包注册自己的字段转换逻辑，而不会让 Core 反向依赖具体第三方库。
-
-Feishu/Lark 适配器、`lark-cli.exe`、项目专用导入后处理和任何游戏数据表不在本仓库中。
+仓库外扩展还可以实现 `IMgDataValueConverter`，为核心标量类型之外的项目字段提供转换逻辑，而不会让 Core 反向依赖具体第三方库。
